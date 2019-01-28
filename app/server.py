@@ -61,7 +61,11 @@ async def analyze(request):
 
     randname = str(uuid.uuid4())
 
-    image_path = path/'images'/randname
+    randext = '.jpg'
+
+    randfn = randname + randext
+
+    image_path = path/'images'/randfn
     print(image_path)
     img.save(image_path)
 
