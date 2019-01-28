@@ -10,12 +10,12 @@ import uuid
 from fastai import *
 from fastai.vision import *
 
-data = ""
+# data = ""
 
-with open('/etc/secrets/model_path', 'r') as myfile:
-    data=myfile.read()
+# with open('/etc/secrets/model_path', 'r') as myfile:
+#     data=myfile.read()
 
-export_file_url = data
+export_file_url = 'https://www.dropbox.com/s/os6a4eewi47k5u7/export.pkl?raw=1'
 # export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
 export_file_name = 'export.pkl'
 
