@@ -10,10 +10,6 @@ import uuid
 from fastai import *
 from fastai.vision import *
 
-# data = ""
-
-# with open('/etc/secrets/model_path', 'r') as myfile:
-#     data=myfile.read()
 
 export_file_url = 'https://www.dropbox.com/s/os6a4eewi47k5u7/export.pkl?raw=1'
 # export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
@@ -58,14 +54,14 @@ def index(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
-    data = await request.form().read()
-    img_bytes = data['file']
-    file_name = data['name']
+    data = await request.form()
+    img_bytes = await (data['file'].read())
+    # file_name = await (data['name'].read())
     img = open_image(BytesIO(img_bytes))
 
     randname = str(uuid.uuid4())
 
-    image_path = path/'images'/file_name
+    image_path = path/'images'/randname
     print(image_path)
     img.save(image_path)
 
