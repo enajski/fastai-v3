@@ -58,8 +58,8 @@ def index(request):
 
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
-    data = await request.form()
-    img_bytes = (data['file'].read())
+    data = await request.form().read()
+    img_bytes = data['file']
     file_name = data['name']
     img = open_image(BytesIO(img_bytes))
 
