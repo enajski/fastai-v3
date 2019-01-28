@@ -33,7 +33,7 @@ function analyze() {
     var file = uploadFiles[0]
     var fileName = file.name
     fileData.append('file', file);
-    fileData.append('name', fileName);, 
+    fileData.append('name', fileName); 
     xhr.send(fileData);
 }
 
