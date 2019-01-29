@@ -14,9 +14,9 @@ function showPicked(input) {
 
 function analyze() {
     var uploadFiles = el('file-input').files;
-    if (uploadFiles.length != 1) alert('Please select 1 file to analyze!');
+    if (uploadFiles.length != 1) alert('Dej mie 1 plik!');
 
-    el('analyze-button').innerHTML = 'Analyzing...';
+    el('analyze-button').innerHTML = 'Analizuja...';
     var xhr = new XMLHttpRequest();
     var loc = window.location
     xhr.open('POST', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
@@ -24,9 +24,9 @@ function analyze() {
     xhr.onload = function(e) {
         if (this.readyState === 4) {
             var response = JSON.parse(e.target.responseText);
-            el('result-label').innerHTML = `To je: = ${response['result']}`;
+            el('result-label').innerHTML = `To je ${response['result']}! <p><small>Sicher: Janusz/Mitia/Nie kot/Zbychu ${response['confidences']}</small></p>.`;
         }
-        el('analyze-button').innerHTML = 'Analyze';
+        el('analyze-button').innerHTML = 'Analizuj';
     }
 
     var fileData = new FormData();

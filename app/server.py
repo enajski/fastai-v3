@@ -5,17 +5,19 @@ from starlette.middleware.cors import CORSMiddleware
 import uvicorn, aiohttp, asyncio
 from io import BytesIO
 
+from os import listdir
 import uuid
 
 from fastai import *
 from fastai.vision import *
 
 
-export_file_url = 'https://www.dropbox.com/s/os6a4eewi47k5u7/export.pkl?raw=1'
+export_file_url = 'https://www.dropbox.com/s/syujkqqrizgs32a/export5.pkl?raw=1'
+# export_file_url = 'https://www.dropbox.com/s/os6a4eewi47k5u7/export.pkl?raw=1'
 # export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
-export_file_name = 'export.pkl'
+export_file_name = 'export5.pkl'
 
-classes = ['janusz', 'mitia', 'zbychu']
+classes = ['janusz', 'mitia', 'niekot', 'zbychu']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -52,28 +54,38 @@ def index(request):
     html = path/'view'/'index.html'
     return HTMLResponse(html.open().read())
 
+
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
     data = await request.form()
     img_bytes = await (data['file'].read())
-    # file_name = await (data['name'].read())
+    file_name = data['name']
     img = open_image(BytesIO(img_bytes))
+
+    prediction = learn.predict(img)
+
+    label = str(prediction[0])
+
+    print(prediction)
+    # print(file_name)
 
     randname = str(uuid.uuid4())
 
-    randext = '.jpg'
+    # randext = '.jpg'
 
-    randfn = randname + randext
+    fn = label + '_' + randname + file_name
 
-    image_path = path/'images'/randfn
+    image_path = path/'images'/fn
+    
     print(image_path)
+
     img.save(image_path)
 
+    # print(listdir(path/'images'))
 
+    return JSONResponse({'result': label,
+                         'confidences': str(prediction[2])})
 
-
-    prediction = learn.predict(img)[0]
-    return JSONResponse({'result': str(prediction)})
 
 if __name__ == '__main__':
     if 'serve' in sys.argv: uvicorn.run(app=app, host='0.0.0.0', port=5042)
