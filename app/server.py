@@ -1,5 +1,5 @@
 from starlette.applications import Starlette
-from starlette.responses import HTMLResponse, JSONResponse
+from starlette.responses import HTMLResponse, JSONResponse, FileResponse
 from starlette.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn, aiohttp, asyncio
@@ -7,6 +7,7 @@ from io import BytesIO
 
 from os import listdir
 import uuid
+import shutil
 
 from fastai import *
 from fastai.vision import *
@@ -83,8 +84,21 @@ async def analyze(request):
 
     # print(listdir(path/'images'))
 
+    
+
     return JSONResponse({'result': label,
                          'confidences': str(prediction[2])})
+
+
+@app.route('/uploads')
+def uploads(request):
+    archive_path = shutil.make_archive(path/'uploads', 'zip', path/'images')
+    print(archive_path)
+
+    response = FileResponse(archive_path, media_type='application/zip')
+    return response
+
+
 
 
 if __name__ == '__main__':
