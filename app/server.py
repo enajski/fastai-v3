@@ -58,7 +58,7 @@ def index(request):
 async def analyze(request):
     data = await request.form()
     img_bytes = await (data['file'].read())
-    file_name = data['name']
+    file_name = data['name'].replace('_', '')
     img = open_image(BytesIO(img_bytes))
 
     prediction = learn.predict(img)
