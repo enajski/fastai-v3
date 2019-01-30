@@ -17,6 +17,8 @@ function analyze() {
     if (uploadFiles.length != 1) alert('Dej mie 1 plik!');
 
     el('analyze-button').innerHTML = 'Analizuja...';
+    el('result-label').innerHTML = '';
+
     var xhr = new XMLHttpRequest();
     var loc = window.location
     xhr.open('POST', `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
