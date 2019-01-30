@@ -13,9 +13,7 @@ from fastai import *
 from fastai.vision import *
 
 
-export_file_url = 'https://www.dropbox.com/s/syujkqqrizgs32a/export5.pkl?raw=1'
-# export_file_url = 'https://www.dropbox.com/s/os6a4eewi47k5u7/export.pkl?raw=1'
-# export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
+export_file_url = 'https://www.dropbox.com/s/3uo583k829i8c7c/export5.pkl?raw=1'
 export_file_name = 'export5.pkl'
 
 classes = ['janusz', 'mitia', 'niekot', 'zbychu']
