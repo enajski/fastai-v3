@@ -13,8 +13,8 @@ from fastai import *
 from fastai.vision import *
 
 
-export_file_url = 'https://www.dropbox.com/s/3uo583k829i8c7c/export5.pkl?raw=1'
-export_file_name = 'export5.pkl'
+export_file_url = 'https://www.dropbox.com/s/tmzpoo5pz7fwa0b/export.pkl?raw=1'
+export_file_name = 'export.pkl'
 
 classes = ['janusz', 'mitia', 'niekot', 'zbychu']
 path = Path(__file__).parent
